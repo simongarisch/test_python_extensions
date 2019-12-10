@@ -12,24 +12,20 @@ There is also a way to run the build_ext --inplace automatically on install
 from setuptools import setup, find_packages
 from Cython.Build import cythonize
 from distutils.extension import Extension
-from Cython.Distutils import build_ext 
+from Cython.Distutils import build_ext
 
-"""
-from setuptools.command.build_py import build_py as _build_py
-
-
-class build_py(_build_py):
-    def run(self):
-        self.run_command("build_ext")
-        return super().run()
-"""
 
 extensions = cythonize([
     Extension(
         name="test_python_extensions.cyadd",
         sources = ["test_python_extensions/cyadd.pyx"],
     ),
+    Extension(
+        name="test_python_extensions.cadd",
+        sources = ["test_python_extensions/cadd.pyx", "test_python_extensions/add.c"],
+    ),
 ])
+
 
 setup(
     name="test_python_extensions",
